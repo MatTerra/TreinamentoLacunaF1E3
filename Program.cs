@@ -17,34 +17,34 @@ usuarios.AddRange(new List<Usuario>() {
 });
 
 // A pesquisa com Where é lazy-loaded
-var diretoriaComWhere = usuarios.Where(usuario => usuario.Grupo.Equals("Diretoria"));
+var diretoriaComWhere = usuarios.Where(usuario => usuario.Grupo == "Diretoria");
 Console.WriteLine("Resultado Diretoria com Where");
 foreach(var membro in diretoriaComWhere)
 {
     Console.WriteLine(membro);
 }
 // A pesquisa com FindAll copia todos os resultados
-var diretoriaComFindAll = usuarios.FindAll(usuario => usuario.Grupo.Equals("Diretoria"));
+var diretoriaComFindAll = usuarios.FindAll(usuario => usuario.Grupo == "Diretoria");
 Console.WriteLine("Resultado Diretoria com FindAll");
 foreach (var membro in diretoriaComFindAll)
 {
     Console.WriteLine(membro);
 }
 Console.WriteLine("Verificando se há usuário sem Grupo");
-if (usuarios.Where(usuario => usuario.Grupo.Equals("")).Any())
+if (usuarios.Where(usuario => usuario.Grupo == "").Any())
 {
     Console.WriteLine("Há usuário sem Grupo");
-    var usuarioSemGrupo = usuarios.Find(usuario => usuario.Grupo.Equals(""));
+    var usuarioSemGrupo = usuarios.Find(usuario => usuario.Grupo == "");
     Console.WriteLine(usuarioSemGrupo);
 } else
 {
     Console.WriteLine("Não há usuário sem grupo");
 }
 Console.WriteLine("Verificando se há usuário sem Grupo com FirstOrDefault");
-if (usuarios.Where(usuario => usuario.Grupo.Equals("")).FirstOrDefault() != default)
+if (usuarios.Where(usuario => usuario.Grupo == "").FirstOrDefault() != default)
 {
     Console.WriteLine("Há usuário sem Grupo");
-    var usuarioSemGrupo = usuarios.Find(usuario => usuario.Grupo.Equals(""));
+    var usuarioSemGrupo = usuarios.Find(usuario => usuario.Grupo == "");
     Console.WriteLine(usuarioSemGrupo);
 }
 else
@@ -52,7 +52,7 @@ else
     Console.WriteLine("Não há usuário sem grupo");
 }
 Console.WriteLine("Buscando Camila");
-Console.WriteLine(usuarios.Find(usuario => usuario.Nome.Equals("Camila")));
+Console.WriteLine(usuarios.Find(usuario => usuario.Nome == "Camila"));
 Console.WriteLine("Lista Crescente de Ids");
 var ids = usuarios.OrderBy(usuario => usuario.Id).Select(usuario => usuario.Id);
 foreach (var id in ids)
