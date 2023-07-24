@@ -28,9 +28,9 @@ foreach (var membro in diretoriaComFindAll)
 {
     Console.WriteLine(membro);
 }
-var usuarioSemGrupo = usuarios.FindAll(usuario => usuario.Grupo == "").FirstOrDefault();
+var usuarioSemGrupo = usuarios.FirstOrDefault(usuario => usuario.Grupo == "");
 Console.WriteLine("Verificando se há usuário sem Grupo com FirstOrDefault");
-if (usuarioSemGrupo != default)
+if (usuarioSemGrupo != null)
 {
     Console.WriteLine("Há usuário sem Grupo");
     Console.WriteLine(usuarioSemGrupo);
