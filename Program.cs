@@ -1,6 +1,4 @@
-﻿using System;
-
-var usuarios = new List<Usuario>()
+﻿var usuarios = new List<Usuario>()
 {
     new Usuario() { Id = 5, Grupo = "Diretoria", Nome = "Carlos" },
     new Usuario() { Id = 21, Grupo = "Diretoria", Nome = "José" },
@@ -19,7 +17,7 @@ usuarios.AddRange(new List<Usuario>() {
 // A pesquisa com Where é lazy-loaded
 var diretoriaComWhere = usuarios.Where(usuario => usuario.Grupo == "Diretoria");
 Console.WriteLine("Resultado Diretoria com Where");
-foreach(var membro in diretoriaComWhere)
+foreach (var membro in diretoriaComWhere)
 {
     Console.WriteLine(membro);
 }
@@ -30,21 +28,11 @@ foreach (var membro in diretoriaComFindAll)
 {
     Console.WriteLine(membro);
 }
-Console.WriteLine("Verificando se há usuário sem Grupo");
-if (usuarios.Where(usuario => usuario.Grupo == "").Any())
-{
-    Console.WriteLine("Há usuário sem Grupo");
-    var usuarioSemGrupo = usuarios.Find(usuario => usuario.Grupo == "");
-    Console.WriteLine(usuarioSemGrupo);
-} else
-{
-    Console.WriteLine("Não há usuário sem grupo");
-}
+var usuarioSemGrupo = usuarios.FindAll(usuario => usuario.Grupo == "").FirstOrDefault();
 Console.WriteLine("Verificando se há usuário sem Grupo com FirstOrDefault");
-if (usuarios.Where(usuario => usuario.Grupo == "").FirstOrDefault() != default)
+if (usuarioSemGrupo != default)
 {
     Console.WriteLine("Há usuário sem Grupo");
-    var usuarioSemGrupo = usuarios.Find(usuario => usuario.Grupo == "");
     Console.WriteLine(usuarioSemGrupo);
 }
 else
@@ -67,11 +55,11 @@ foreach (var id in ids)
 }
 Console.WriteLine("Agrupamentos de Usuários");
 var usuariosPorGrupo = usuarios.GroupBy(usuario => usuario.Grupo);
-foreach(var grupo in usuariosPorGrupo)
+foreach (var grupo in usuariosPorGrupo)
 {
     Console.Write(grupo.Key);
     Console.Write(" -");
-    foreach(var usuario in grupo)
+    foreach (var usuario in grupo)
     {
         Console.Write(" ");
         Console.Write(usuario.Nome);
